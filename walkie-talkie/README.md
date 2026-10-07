@@ -68,8 +68,11 @@ walkie-talkie/
 ```
 
 ### How it works (short version)
+<img width="1882" height="972" alt="image" src="https://github.com/user-attachments/assets/c20aa48e-7516-4896-8fed-80c95f77e665" />
 
 1. **Join page** → `POST /join` stores nickname + channel in the PHP session.
+<img width="1808" height="947" alt="image" src="https://github.com/user-attachments/assets/967cff34-2006-4858-a131-41e7a4b73b22" />
+
 2. **Channel page** → the server creates a *signed token* (peer id, nickname, channel, expiry) and hands it to JavaScript.
 3. `signaling.js` calls `POST /signal` with `hello`, then keeps calling `poll` (about every 0.6 s). Messages: `hello`, `poll`, `ptt_request`, `ptt_release`, `signal`, `leave`.
 4. The **new** user creates a WebRTC offer for every user already in the room; the others answer. The offer/answer/ICE data is relayed through `/signal`. After that, audio flows **directly** browser-to-browser.
