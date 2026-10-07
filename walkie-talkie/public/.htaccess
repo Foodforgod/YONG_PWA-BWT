@@ -1,0 +1,11 @@
+# Used when the document root is /public
+Options -Indexes
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
+<IfModule mod_headers.c>
+    Header always set Permissions-Policy "microphone=(self), camera=(), geolocation=()"
+</IfModule>

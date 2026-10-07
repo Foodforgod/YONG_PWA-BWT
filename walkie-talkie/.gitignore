@@ -1,0 +1,5 @@
+.env
+storage/rooms/*.json
+storage/ratelimit/*.json
+storage/logs/*.log
+storage/secret.key

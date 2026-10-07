@@ -1,0 +1,26 @@
+# Walkie Talkie - Apache rewrite rules (XAMPP / cPanel)
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Never expose internal folders or secrets
+    RewriteRule ^(app|config|storage|views|tests)(/|$) - [F,L]
+    RewriteRule ^\.env - [F,L]
+
+    # Everything that is not a real file goes to the front controller
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+<FilesMatch "^\.(env|git)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# Microphone access only for this site
+<IfModule mod_headers.c>
+    Header always set Permissions-Policy "microphone=(self), camera=(), geolocation=()"
+</IfModule>
